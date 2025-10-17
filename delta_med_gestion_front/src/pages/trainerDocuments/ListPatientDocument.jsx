@@ -19,10 +19,14 @@ const ListPatientDocument = () => {
                 setLoaded(true)
             })
             .catch(error => {
-                console.log(error)
-                setErr(error)
-                setLoaded(true)
-            })
+                if (error?.response?.status === 404) {
+                    setDocuments([]);
+                    setErr(null);
+                    } else {
+                    setErr(error);
+                    }
+                    setLoaded(true);
+                })
     }, [])
 
     if ( !loaded ) {
@@ -40,6 +44,19 @@ const ListPatientDocument = () => {
         return (
             <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                 <span class="font-medium">Erreur : {err.response.status}</span> {err.response.statusText == "Not Found" && ("Aucune ressources trouvées")}
+            </div>
+        )
+    }
+    else if (documents.length === 0) {
+        return (
+            <div>
+                <h1 className='text-4xl text-center mt-5 mb-5 text-sky-800'>Liste des documents administratifs</h1>    
+                <div className="relative overflow-x-auto hidden md:block">
+                    <h2>Pas de documents</h2>
+                </div>
+                <div className='text-center mt-5'>
+                    <a className='focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900' href="/patient/list">Retour</a>
+                </div>
             </div>
         )
     }

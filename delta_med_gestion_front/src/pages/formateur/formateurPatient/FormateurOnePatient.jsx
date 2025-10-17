@@ -91,6 +91,21 @@ const FormateurOnePatient = () => {
                     </div>
                 </div>
                 {/*  */}
+                {/*  */}
+                <div className="w-full p-5 m-auto max-w-5/6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 mb-5">
+                    <div className="flex flex-col items-center pb-10">
+                        <h5 className="mb-1 text-3xl font-medium text-gray-900 dark:text-white mb-5">Documents</h5>
+                        <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white"><span className='text-sky-800'>Nom : </span>{patient.tpLastname || "Aucun"}</h5>
+                        <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white"><span className='text-sky-800'>Prénom : </span>{patient.tpFirstname || "Aucun"}</h5>
+                        <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white"><span className='text-sky-800'>N° de téléphone : </span>{patient.tpPhoneNumber || "Aucun"}</h5>
+                        <div className="flex mt-4 md:mt-6">
+                            <a className='focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900' href={`/secretarydocuments/list/${patient._id}`}>Documents administratifs</a>
+                            <a className='focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900' href={`/trainerdocuments/list/${patient._id}`}>Documents médicaux</a>
+                            
+                        </div>
+                    </div>
+                </div>
+                {/*  */}
             </div>
         );
     }

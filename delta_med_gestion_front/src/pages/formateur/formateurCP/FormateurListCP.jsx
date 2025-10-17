@@ -41,7 +41,7 @@ const FormateurListCP = () => {
     else {
         return (
             <div className='ml-64'>
-                <h1 className='text-4xl text-center mt-5 mb-5 text-sky-800'>Dossiers patients</h1>
+                <h1 className='text-4xl text-center mt-5 mb-5 text-sky-800'>Caisses primaires</h1>
                 <div className="space-y-3 md:hidden">
                     {cP.filter(caisse => caisse.secretary.role === "Etudiant").map((caisse, index) => (
                     <div key={index} className="rounded-lg border p-4 bg-white dark:bg-gray-800">

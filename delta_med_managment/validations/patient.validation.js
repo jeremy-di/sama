@@ -9,7 +9,7 @@ export default function patientValidation(body){
       address: joi.string().required(),
       zipCode: joi.string().required(),
       town: joi.string().required(),
-      email: joi.string(),
+      email: joi.string().empty('').default(null).optional(),
       phoneNumber: joi.string().required(),
       tpLastname: joi.string().empty('').default(null).optional(),
       tpFirstname: joi.string().empty('').default(null).optional(),
