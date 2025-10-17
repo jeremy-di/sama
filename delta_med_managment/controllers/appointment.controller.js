@@ -31,6 +31,28 @@ const getAllAppointments = async(req, res) => {
     }
 }
 
+const getAppointmentsByPatientId = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ message: "Missing patient id" });
+    }
+
+    const appointments = await Appointment.find({ patient: id }).populate("secretary", "login").populate("patient", "lastname firstname")
+      .sort({ createdAt: -1 });
+
+    if (!appointments || appointments.length === 0) {
+      return res.status(404).json({ message: "Aucun rendez-vous trouvé pour ce patient" });
+    }
+
+    return res.status(200).json(appointments);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 const getAppointmentById = async(req,res) => {
     try {
         const appointment = await Appointment.findById(req.params.id).populate("patient", "lastname firstname").populate("doctor", "lastname firstname")
@@ -79,4 +101,4 @@ const deleteAppointment = async(req, res) => {
     }
 }
 
-export { createAppointment, getAllAppointments, getAppointmentById, updateAppointment, deleteAppointment }
+export { createAppointment, getAllAppointments, getAppointmentsByPatientId, getAppointmentById, updateAppointment, deleteAppointment }
